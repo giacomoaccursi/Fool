@@ -3,26 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVM.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVM.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/svm/SVMVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/FOOL.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/FOOL.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/lib/BaseASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/lib/BaseASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +32,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.123076916" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -98,5 +80,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
