@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOL.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOL.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/compiler/FOOLVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/AST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/SymbolTableASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

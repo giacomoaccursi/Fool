@@ -128,8 +128,8 @@ public class AST {
 	}
 
 	public static class NotNode extends Node {
-		final Node n;
-		NotNode(Node node) {n = node;}
+		final Node exp;
+		NotNode(Node node) {exp = node;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
