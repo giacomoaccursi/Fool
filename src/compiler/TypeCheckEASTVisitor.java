@@ -151,19 +151,30 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(AndNode n) throws TypeException {
 		if (print) printNode(n);
-		if ( !(isSubtype(visit(n.left), new IntTypeNode())
-				&& isSubtype(visit(n.right), new IntTypeNode())) )
-			throw new TypeException("Non integers in multiplication",n.getLine());
-		return new IntTypeNode();
+		TypeNode l = visit(n.left);
+		TypeNode r = visit(n.right);
+		if ( !(l instanceof  BoolTypeNode && r instanceof BoolTypeNode) )
+			throw new TypeException("Incompatible types in and",n.getLine());
+		return new BoolTypeNode();
 	}
 
 	@Override
 	public TypeNode visitNode(OrNode n) throws TypeException {
 		if (print) printNode(n);
-		if ( !(isSubtype(visit(n.left), new IntTypeNode())
-				&& isSubtype(visit(n.right), new IntTypeNode())) )
-			throw new TypeException("Non integers in multiplication",n.getLine());
-		return new IntTypeNode();
+		TypeNode l = visit(n.left);
+		TypeNode r = visit(n.right);
+		if ( !(l instanceof  BoolTypeNode && r instanceof BoolTypeNode) )
+			throw new TypeException("Incompatible types in and",n.getLine());
+		return new BoolTypeNode();
+	}
+
+	@Override
+	public TypeNode visitNode(NotNode n) throws TypeException {
+		if (print) printNode(n);
+		TypeNode t = visit(n.exp);
+		if ( !(t instanceof  BoolTypeNode))
+			throw new TypeException("Bool type required for not",n.getLine());
+		return t;
 	}
 
 	@Override

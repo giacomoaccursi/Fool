@@ -3,6 +3,9 @@ package compiler;
 import compiler.AST.*;
 import compiler.lib.*;
 import compiler.exc.*;
+
+import java.util.concurrent.SubmissionPublisher;
+
 import static compiler.lib.FOOLlib.*;
 
 public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidException> {
@@ -114,6 +117,106 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	}
 
 	@Override
+	public String visitNode(GreaterEqualNode n) {
+		if (print) printNode(n);
+	 	String l1 = freshLabel();
+	 	String l2 = freshLabel();
+		return nlJoin(
+			visit(n.right),
+			visit(n.left),
+			"bleq "+l1,
+			"push 0",
+			"b "+l2,
+			l1+":",
+			"push 1",
+			l2+":"
+		);
+	}
+
+	@Override
+	public String visitNode(LessEqualNode n) {
+		if (print) printNode(n);
+	 	String l1 = freshLabel();
+	 	String l2 = freshLabel();
+		return nlJoin(
+			visit(n.left),
+			visit(n.right),
+			"bleq "+l1,
+			"push 0",
+			"b "+l2,
+			l1+":",
+			"push 1",
+			l2+":"
+		);
+	}
+
+	@Override
+	public String visitNode(NotNode n) {
+		if (print) printNode(n);
+		String l1 = freshLabel();
+		String l2 = freshLabel();
+		return nlJoin(
+				visit(n.exp),
+				"push 0",
+				"beq "+l1,
+				"push 0",
+				"b "+l2,
+				l1+":",
+				"push 1",
+				l2+":"
+		);
+  	}
+
+	@Override
+	public String visitNode(AndNode n) {
+		if (print) printNode(n);
+		String l1 = freshLabel();
+		String l2 = freshLabel();
+		String l3 = freshLabel();
+		return nlJoin(
+				//confronto quello di destra con 1, se sono diversi pusho 0 ed esco, se sono uguali vado
+				//ad l1 e confronto il secondo con 1, se sono diversi pusho 0 e esco, se sono uguali  vado a due, pusho 1 e esco
+				visit(n.left),
+				"push 1",
+				"beq "+l1,
+				"push 0",
+				"b "+l3,
+				l1+":",
+				visit(n.right),
+				"push 1",
+				"beq "+l2,
+				"push 0",
+				"b "+l3,
+				l2+":",
+				"push 1",
+				l3+":"
+		);
+	}
+
+	@Override
+	public String visitNode(OrNode n) {
+		if (print) printNode(n);
+		String l1 = freshLabel();
+		String l2 = freshLabel();
+		return nlJoin(
+				//confronto il primo con 1, se sono uguali pusho 1 ed esco, se son diversi confronto il secondo con 1,
+				//se son uguali pusho 1 ed esco, altrimenti pusho 0 ed esco
+				visit(n.left),
+				"push 1",
+				"beq "+l1,
+				visit(n.right),
+				"push 1",
+				"beq "+l1,
+				"push 0",
+				"b "+l2,
+				l1+":",
+				"push 1",
+				l2+":"
+
+		);
+	}
+
+	@Override
 	public String visitNode(TimesNode n) {
 		if (print) printNode(n);
 		return nlJoin(
@@ -129,9 +232,31 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		return nlJoin(
 			visit(n.left),
 			visit(n.right),
-			"add"				
+			"add"
 		);
 	}
+
+	@Override
+	public String visitNode(MinusNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"sub"
+		);
+	}
+
+	@Override
+	public String visitNode(DivNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"div"
+		);
+	}
+
+
 
 	@Override
 	public String visitNode(CallNode n) {

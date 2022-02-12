@@ -2,7 +2,130 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Fool.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOL.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLBaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/compiler/FOOLVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVM.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVM.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMBaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/svm/SVMVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$ArrowTypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$BoolNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$BoolTypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$CallNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$EqualNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$FunNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$IdNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$IfNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$IntNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$IntTypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$ParNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$PlusNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$PrintNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$ProgLetInNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$ProgNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$TimesNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST$VarNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/AST.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/ASTGenerationSTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/CodeGenerationASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOL.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOL.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOL.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLBaseListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLBaseVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLLexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$BoolTypeContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$CallContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$DecContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$EqContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$ExpContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$FalseContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$FundecContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$IdContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$IfContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$IntTypeContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$IntegerContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$LetInProgContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$NoDecProgContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$ParsContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$PlusContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$PrintContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$ProgContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$ProgbodyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$TimesContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$TrueContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$TypeContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser$VardecContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/FOOLVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/PrintEASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/STentry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/SymbolTableASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/TypeCheckEASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/TypeRels.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/exc/IncomplException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/exc/TypeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/exc/UnimplException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/exc/VoidException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/BaseASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/BaseEASTVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/DecNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/FOOLlib.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/TypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/compiler/lib/Visitable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/ExecuteVM.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVM.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVM.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVM.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMBaseListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMBaseVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMLexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMParser$AssemblyContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMParser$InstructionContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Fool/svm/SVMVisitor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/compiler/FOOL.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/compiler/FOOL.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/compiler/FOOL.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/compiler/FOOLLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/compiler/FOOLLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/svm/SVM.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/svm/SVM.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/svm/SVM.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/svm/SVMLexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/Fool/svm/SVMLexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prova2.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/prova2.fool.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/PrintEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/PrintEASTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,9 +145,9 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/svm/ExecuteVM.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/compiler/FOOL.g4" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/compiler/Test.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/svm/ExecuteVM.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="24xULIQCn2ewvQV36pKZvIWRowF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -35,8 +158,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Fool" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.123076916" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
