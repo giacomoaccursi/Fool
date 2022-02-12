@@ -128,9 +128,8 @@ public class AST {
 	}
 
 	public static class NotNode extends Node {
-		final Node left;
-		final Node right;
-		NotNode(Node l, Node r) {left = l; right = r;}
+		final Node n;
+		NotNode(Node node) {n = node;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
