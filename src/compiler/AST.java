@@ -49,16 +49,13 @@ public class AST {
 
 	public static class ClassNode extends DecNode {
 		final String id;
-		final List<DecNode> fieldList;
-		final List<DecNode> methodList;
-		final Node exp;
-		ClassNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
+		final List<FieldNode> fieldList;
+		final List<MethodNode> methodList;
+		ClassNode(String i, List<FieldNode> fl, List<MethodNode> dl) {
 			id=i;
-			fieldList=Collections.unmodifiableList(pl);
+			fieldList=Collections.unmodifiableList(fl);
 			methodList=Collections.unmodifiableList(dl);
-			exp=e;
 		}
-		//void setType(TypeNode t) {type = t;}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
@@ -88,10 +85,30 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+//	public static class MethodNode extends DecNode {
+//		final String id;
+//		final Node exp;
+//		MethodNode(String i, TypeNode t, Node v) {id = i; type = t; exp = v;}
+//
+//		@Override
+//		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+//	}
+
 	public static class MethodNode extends DecNode {
 		final String id;
+		final TypeNode retType;
+		final List<ParNode> parlist;
+		final List<DecNode> declist;
 		final Node exp;
-		MethodNode(String i, TypeNode t, Node v) {id = i; type = t; exp = v;}
+		MethodNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
+			id=i;
+			retType=rt;
+			parlist=Collections.unmodifiableList(pl);
+			declist=Collections.unmodifiableList(dl);
+			exp=e;
+		}
+
+		//void setType(TypeNode t) {type = t;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
