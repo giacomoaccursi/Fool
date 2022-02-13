@@ -47,6 +47,22 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	public static class ClassNode extends DecNode {
+		final String id;
+		final List<DecNode> fieldList;
+		final List<DecNode> methodList;
+		final Node exp;
+		ClassNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
+			id=i;
+			fieldList=Collections.unmodifiableList(pl);
+			methodList=Collections.unmodifiableList(dl);
+			exp=e;
+		}
+		//void setType(TypeNode t) {type = t;}
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
 	public static class ParNode extends DecNode {
 		final String id;
 		ParNode(String i, TypeNode t) {id = i; type = t;}
@@ -63,7 +79,24 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
-		
+
+	public static class FieldNode extends DecNode {
+		final String id;
+		FieldNode(String i, TypeNode t) {id = i; type = t;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class MethodNode extends DecNode {
+		final String id;
+		final Node exp;
+		MethodNode(String i, TypeNode t, Node v) {id = i; type = t; exp = v;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
 	public static class PrintNode extends Node {
 		final Node exp;
 		PrintNode(Node e) {exp = e;}
@@ -182,7 +215,23 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
-	
+
+	public static class ClassCallNode extends Node {
+		final String fieldId;
+		final String methodId;
+		final List<Node> arglist;
+		STentry entry;
+		int nl;
+		ClassCallNode(String fID, String mID, List<Node> aList) {
+			fieldId = fID;
+			methodId = mID;
+			arglist = Collections.unmodifiableList(aList);
+		}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
 	public static class IdNode extends Node {
 		final String id;
 		STentry entry;
@@ -192,7 +241,26 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
-	
+
+	public static class NewNode extends Node {
+		final String classId;
+		final List<Node> argList;
+		STentry entry;
+		int nl;
+		NewNode(String cID, List<Node> aList) {
+			classId = cID;
+			argList = aList;
+		}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class EmptyNode extends Node {
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
 	public static class BoolNode extends Node {
 		final Boolean val;
 		BoolNode(boolean n) {val = n;}
@@ -232,5 +300,31 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
+
+	public static class ClassTypeNode extends TypeNode {
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class MethodTypeNode extends TypeNode {
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class RefTypeNode extends TypeNode {
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class EmptyTypeNode extends TypeNode {
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+
 
 }
