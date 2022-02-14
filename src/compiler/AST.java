@@ -9,9 +9,11 @@ public class AST {
 	
 	public static class ProgLetInNode extends Node {
 		final List<DecNode> declist;
+		final List<ClassNode> classList;
 		final Node exp;
-		ProgLetInNode(List<DecNode> d, Node e) {
-			declist = Collections.unmodifiableList(d); 
+		ProgLetInNode(List<ClassNode> c, List<DecNode> d, Node e) {
+			declist = Collections.unmodifiableList(d);
+			classList = Collections.unmodifiableList(c);
 			exp = e;
 		}
 
@@ -49,12 +51,12 @@ public class AST {
 
 	public static class ClassNode extends DecNode {
 		final String id;
-		final List<FieldNode> fields;
-		final List<MethodNode> methods;
+		final List<FieldNode> fieldList;
+		final List<MethodNode> methodList;
 		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods ) {
 			id=i;
-			this.fields=Collections.unmodifiableList(fields);
-			this.methods=Collections.unmodifiableList(methods);
+			this.fieldList=Collections.unmodifiableList(fields);
+			this.methodList=Collections.unmodifiableList(methods);
 		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
