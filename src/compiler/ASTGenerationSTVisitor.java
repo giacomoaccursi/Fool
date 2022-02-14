@@ -8,6 +8,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import compiler.AST.*;
 import compiler.FOOLParser.*;
 import compiler.lib.*;
+import org.antlr.v4.runtime.tree.RuleNode;
+
 import static compiler.lib.FOOLlib.*;
 
 public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
@@ -223,6 +225,42 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
 		Node n = new CallNode(c.ID().getText(), arglist);
 		n.setLine(c.ID().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitDotCall(DotCallContext c) {
+		if (print) printVarAndProdName(c);
+		List<Node> arglist = new ArrayList<>();
+		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
+		Node n = new CallNode(c.ID(0).getText(), arglist);
+		n.setLine(c.ID(0).getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitNew(NewContext c) {
+		if (print) printVarAndProdName(c);
+		List<Node> arglist = new ArrayList<>();
+		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
+		Node n = new NewNode(c.ID().getText(), arglist);
+		n.setLine(c.ID().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitIdType(IdTypeContext c) {
+		if (print) printVarAndProdName(c);
+		IdNode n = new IdNode(c.ID().getText());
+		n.setLine(c.ID().getSymbol().getLine());
+		return new RefTypeNode(n);
+	}
+
+	@Override
+	public Node visitNull(NullContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new EmptyNode();
+		n.setLine(c.NULL().getSymbol().getLine());
 		return n;
 	}
 

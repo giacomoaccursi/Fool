@@ -49,12 +49,12 @@ public class AST {
 
 	public static class ClassNode extends DecNode {
 		final String id;
-		final List<FieldNode> fieldList;
-		final List<MethodNode> methodList;
-		ClassNode(String i, List<FieldNode> fl, List<MethodNode> dl) {
+		final List<FieldNode> fields;
+		final List<MethodNode> methods;
+		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods ) {
 			id=i;
-			fieldList=Collections.unmodifiableList(fl);
-			methodList=Collections.unmodifiableList(dl);
+			this.fields=Collections.unmodifiableList(fields);
+			this.methods=Collections.unmodifiableList(methods);
 		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
@@ -331,7 +331,10 @@ public class AST {
 	}
 
 	public static class RefTypeNode extends TypeNode {
-
+		IdNode id;
+		RefTypeNode(IdNode id) {
+			this.id = id;
+		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
