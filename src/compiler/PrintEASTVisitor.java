@@ -227,6 +227,26 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void,VoidException> {
 		visit(n.retType);
 		return null;
 	}
+
+	@Override
+	public Void visitNode(RefTypeNode n){
+		return null;
+	}
+
+	@Override
+	public Void visitNode(NewNode n){
+		return null;
+	}
+
+	@Override
+	public Void visitNode(EmptyNode n){
+		return null;
+	}
+
+	@Override
+	public Void visitNode(ClassCallNode n){
+		return null;
+	}
 	
 	@Override
 	public Void visitSTentry(STentry entry) {
