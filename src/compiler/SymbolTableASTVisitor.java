@@ -314,7 +314,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			n.nl = nestingLevel;
 
 			if (!classTable.get(((RefTypeNode) n.entry.type).idNode.id).containsKey(n.methodId)) {
-				System.out.println("Method" + n.fieldId + " at line " + n.getLine() + " not declared in class " + ((RefTypeNode) n.entry.type).idNode.id);
+				System.out.println("Method" + n.methodId + " at line " + n.getLine() + " not declared in class " + ((RefTypeNode) n.entry.type).idNode.id);
 				stErrors++;
 			}
 		}
