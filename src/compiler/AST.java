@@ -327,7 +327,12 @@ public class AST {
 	}
 
 	public static class MethodTypeNode extends TypeNode {
-
+		final List<TypeNode> parlist;
+		final TypeNode ret;
+		MethodTypeNode(List<TypeNode> p, TypeNode r) {
+			parlist = Collections.unmodifiableList(p);
+			ret = r;
+		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
