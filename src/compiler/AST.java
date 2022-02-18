@@ -87,15 +87,6 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-//	public static class MethodNode extends DecNode {
-//		final String id;
-//		final Node exp;
-//		MethodNode(String i, TypeNode t, Node v) {id = i; type = t; exp = v;}
-//
-//		@Override
-//		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
-//	}
-
 	public static class MethodNode extends DecNode {
 		final String id;
 		final TypeNode retType;
@@ -221,7 +212,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-	public static class CallNode extends Node {
+	public static class CallNode extends DecNode {
 		final String id;
 		final List<Node> arglist;
 		STentry entry;
@@ -295,7 +286,8 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
-	
+
+	//tipo funzionale, contiene dominio e condominio della funzione
 	public static class ArrowTypeNode extends TypeNode {
 		final List<TypeNode> parlist;
 		final TypeNode ret;
@@ -321,18 +313,24 @@ public class AST {
 	}
 
 	public static class ClassTypeNode extends TypeNode {
+		List<TypeNode> allFields;
+		List<ArrowTypeNode> allMethods;
+		public ClassTypeNode(List<TypeNode> allFields, List<ArrowTypeNode> allMethods) {
+			this.allFields = allFields;
+			this.allMethods = allMethods;
+		}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
 	public static class MethodTypeNode extends TypeNode {
-		final List<TypeNode> parlist;
-		final TypeNode ret;
-		MethodTypeNode(List<TypeNode> p, TypeNode r) {
-			parlist = Collections.unmodifiableList(p);
-			ret = r;
+		ArrowTypeNode fun;
+
+		public MethodTypeNode(ArrowTypeNode fun) {
+			this.fun = fun;
 		}
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
