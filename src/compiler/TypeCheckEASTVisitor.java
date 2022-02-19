@@ -209,7 +209,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(CallNode n) throws TypeException {
 		if (print) printNode(n,n.id);
-		TypeNode t = visit(n.entry); 
+		TypeNode t = visit(n.entry);
 		if ( !(t instanceof ArrowTypeNode) )
 			throw new TypeException("Invocation of a non-function "+n.id,n.getLine());
 		ArrowTypeNode at = (ArrowTypeNode) t;
@@ -220,6 +220,27 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id,n.getLine());
 		return at.ret;
 	}
+
+	@Override
+	public TypeNode visitNode(NewNode n) throws TypeException {
+		if (print) printNode(n, n.classId);
+		TypeNode t = visit(n.entry);
+		if( !(t instanceof ClassTypeNode)){
+			throw new TypeException("Invocation of a non-class "+ n.classId, n.getLine());
+
+		}
+		ClassTypeNode ct = (ClassTypeNode) t;
+		if (!(ct.allFields.size() == n.argList.size())){
+			throw new TypeException("Wrong number of fields for " +n.classId + "class", n.getLine());
+		}
+		for (int i = 0; i < n.argList.size();i++) {
+			if (!(isSubtype(visit(n.argList.get(i)),ct.allFields.get(i)))){
+				throw new TypeException("Wrong type for "+(i+1)+"-th field in the invocation of "+n.classId,n.getLine());
+			}
+		}
+		return new RefTypeNode(new IdNode(n.classId));
+	}
+
 
 	@Override
 	public TypeNode visitNode(IdNode n) throws TypeException {
