@@ -231,6 +231,7 @@ public class AST {
 		final String methodId;
 		final List<Node> arglist;
 		STentry entry;
+		STentry methodEntry;
 		int nl;
 		ClassCallNode(String fID, String mID, List<Node> aList) {
 			fieldId = fID;

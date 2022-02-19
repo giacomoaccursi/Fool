@@ -334,17 +334,23 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		if (print) printNode(n);
 		STentry entry = stLookup(n.fieldId);
 		if (entry == null) {
-			System.out.println("Field" + n.fieldId + " at line " + n.getLine() + " not declared");
+			System.out.println("Field " + n.fieldId + " at line " + n.getLine() + " not declared");
 			stErrors++;
 		} else {
 
 			n.entry = entry;
 			n.nl = nestingLevel;
 
-			if (!classTable.get(((RefTypeNode) n.entry.type).idNode.id).containsKey(n.methodId)) {
-				System.out.println("Method" + n.methodId + " at line " + n.getLine() + " not declared in class " + ((RefTypeNode) n.entry.type).idNode.id);
+			STentry methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
+			if (methodEntry != null) {
+				n.methodEntry = methodEntry;
+			}else{
+				System.out.println("Method " + n.methodId + " at line " + n.getLine() + " not declared in class " + ((RefTypeNode) n.entry.type).idNode.id);
 				stErrors++;
 			}
+		}
+		for(Node arg : n.arglist){
+			visit(arg);
 		}
 		return null;
 	}
