@@ -59,9 +59,9 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	public TypeNode visitNode(ClassCallNode n) throws TypeException {
 		if (print) printNode(n,n.fieldId + "." + n.methodId);
 		TypeNode t = visit(n.methodEntry);
-		if ( !(t instanceof ArrowTypeNode) )
-			throw new TypeException("Invocation of a non-function "+n.methodId,n.getLine());
-		ArrowTypeNode at = (ArrowTypeNode) t;
+		if ( !(t instanceof MethodTypeNode) )
+			throw new TypeException("Invocation of a non-method "+n.methodId,n.getLine());
+		ArrowTypeNode at = ((MethodTypeNode) t) .fun;
 		if ( !(at.parlist.size() == n.arglist.size()) )
 			throw new TypeException("Wrong number of parameters in the invocation of "+n.methodId,n.getLine());
 		for (int i = 0; i < n.arglist.size(); i++)
@@ -225,15 +225,20 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	public TypeNode visitNode(CallNode n) throws TypeException {
 		if (print) printNode(n,n.id);
 		TypeNode t = visit(n.entry);
-		if ( !(t instanceof ArrowTypeNode) )
+		if ( !(t instanceof ArrowTypeNode) && !(t instanceof MethodTypeNode) )
 			throw new TypeException("Invocation of a non-function "+n.id,n.getLine());
-		ArrowTypeNode at = (ArrowTypeNode) t;
-		if ( !(at.parlist.size() == n.arglist.size()) )
+		ArrowTypeNode tn = null;
+		if (t instanceof MethodTypeNode) {
+			tn = ((MethodTypeNode) t).fun ;
+		} else {
+			tn = (ArrowTypeNode) t;
+		}
+		if ( !(tn.parlist.size() == n.arglist.size()) )
 			throw new TypeException("Wrong number of parameters in the invocation of "+n.id,n.getLine());
 		for (int i = 0; i < n.arglist.size(); i++)
-			if ( !(isSubtype(visit(n.arglist.get(i)),at.parlist.get(i))) )
+			if ( !(isSubtype(visit(n.arglist.get(i)),tn.parlist.get(i))) )
 				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id,n.getLine());
-		return at.ret;
+		return tn.ret;
 	}
 
 	@Override
@@ -306,6 +311,8 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return new EmptyTypeNode();
 	}
 
+
+
 // STentry (ritorna campo type)
 
 	@Override
@@ -314,4 +321,3 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return ckvisit(entry.type); 
 	}
 }
-
