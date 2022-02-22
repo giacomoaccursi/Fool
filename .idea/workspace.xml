@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TypeRels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/AST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/SymbolTableASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +41,7 @@
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.123076916" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">

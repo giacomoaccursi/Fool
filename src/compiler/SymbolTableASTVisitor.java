@@ -64,26 +64,27 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		List<String> methodsAndFields = new ArrayList<>(); //lista per tenere traccia degli id di metodi e campi dichiarati nella classe
 
+		this.decOffset = -1;
 		for (FieldNode field : n.fieldList) {
 			if (!methodsAndFields.contains(field.id)) {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(field.id);
 				STentry ste = new STentry(nestingLevel, field.getType(), decOffset--);
 				virtualTable.put(field.id, ste);
-				((ClassTypeNode) entry.type).allFields.add(ste.type);
+				((ClassTypeNode) entry.type).allFields.add(-decOffset, ste.type);
 			} else {
 				System.out.println("Id " + field.id + " at line " + field.getLine() + " already declared");
 				stErrors++;
 			}
-
 		}
+		this.decOffset = 0;
 		for (MethodNode method : n.methodList){
 			if (!methodsAndFields.contains(method.id)) {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(method.id);
 				visit(method);
 				//((ClassTypeNode)entry.type).allMethods.add(((MethodTypeNode)method.getType()).fun);
-				((ClassTypeNode)entry.type).allMethods.add(((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
+				((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
 			}else{
 				System.out.println("Id " + method.id + " at line "+ method.getLine() +" already declared");
 				stErrors++;
@@ -100,7 +101,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		Map<String, STentry> hm = symTable.get(nestingLevel);
 		List<TypeNode> parTypes = new ArrayList<>();
 		for (ParNode par : n.parlist) parTypes.add(par.getType());
-		STentry entry = new STentry(nestingLevel, new MethodTypeNode(new ArrowTypeNode(parTypes, n.retType)), decOffset--);
+		n.offset = decOffset++;
+		STentry entry = new STentry(nestingLevel, new MethodTypeNode(new ArrowTypeNode(parTypes, n.retType)), n.offset);
 		if (hm.put(n.id, entry) != null) {
 			System.out.println("Method id " + n.id + " at line " + n.getLine() + " already declared");
 			stErrors++;
