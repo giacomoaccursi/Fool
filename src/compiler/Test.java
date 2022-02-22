@@ -7,8 +7,8 @@ import compiler.lib.*;
 import compiler.exc.*;
 import java.nio.file.*;
 
-import svm.*;
-//import visualsvm.*;
+//import svm.*;
+import visualsvm.*;
 
 public class Test {
     public static void main(String[] args) throws Exception {
@@ -78,11 +78,11 @@ public class Test {
     	if (lexerASM.lexicalErrors+parserASM.getNumberOfSyntaxErrors()>0) System.exit(1);
 
     	System.out.println("Running generated code via Stack Virtual Machine.");
-    	ExecuteVM vm = new ExecuteVM(parserASM.code);
+    	//ExecuteVM vm = new ExecuteVM(parserASM.code);
 //		VISUAL VM
-//		ExecuteVM vm = new ExecuteVM(parserASM.code,parserASM.sourceMap,Files.readAllLines(Paths.get(fileName+".asm")));
+		ExecuteVM vm = new ExecuteVM(parserASM.code,parserASM.sourceMap,Files.readAllLines(Paths.get(fileName+".asm")));
 
-    	vm.cpu();
+		vm.cpu();
 
     }
 }

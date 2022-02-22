@@ -3,7 +3,8 @@ package compiler;
 import compiler.AST.*;
 import compiler.lib.*;
 import compiler.exc.*;
-import svm.ExecuteVM;
+//import svm.ExecuteVM;
+import visualsvm.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,13 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	public String visitNode(ProgLetInNode n) {
 		if (print) printNode(n);
 		String declCode = null;
+		String classCode = null;
+		for (Node classNode : n.classList) classCode=nlJoin(classCode, visit(classNode));
 		for (Node dec : n.declist) declCode=nlJoin(declCode,visit(dec));
 		return nlJoin(
-			"push 0",	
-			declCode, // generate code for declarations (allocation)			
+			"push 0",
+			classCode,
+			declCode,// generate code for declarations (allocation)
 			visit(n.exp),
 			"halt",
 			getCode()
@@ -51,13 +55,11 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		for (String s : dispatchTable){
 			labels = nlJoin(labels,"push " + s, "lhp", "sw", "lhp", "push 1", "add", "shp");
 		}
-		putCode(
-				nlJoin(
-					"lhp",
-					labels
-				)
+
+		return nlJoin(
+				"lhp",
+				labels
 		);
-		return "pop";
 	}
 
 	@Override
