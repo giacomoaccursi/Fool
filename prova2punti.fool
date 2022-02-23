@@ -1,7 +1,0 @@
-let
-  var a:int = 1+5;
-  var b:int = 5-1;
-  var c:int = 2*5;
-  var d:int = 4/2;
-in
-  print (if !(a >= b) then { c / d } else { d + a });

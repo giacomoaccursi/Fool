@@ -51,10 +51,11 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		Map<String, STentry> hm = symTable.get(nestingLevel);
 		STentry entry = new STentry(nestingLevel, new ClassTypeNode(new ArrayList<>(), new ArrayList<>()),decOffset--);
 		Map<String, STentry> virtualTable = new HashMap<>();
-		if (hm.put(n.id, entry) != null | classTable.put(n.id, virtualTable) != null) {
+		if (hm.put(n.id, entry) != null) {
 			System.out.println("Class id " + n.id + " at line "+ n.getLine() +" already declared");
 			stErrors++;
 		}
+		classTable.put(n.id, virtualTable);
 
 		nestingLevel++;
 		 //metto la virtual table della classe dentro il nuovo livello della symbol table
@@ -69,9 +70,10 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			if (!methodsAndFields.contains(field.id)) {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(field.id);
-				STentry ste = new STentry(nestingLevel, field.getType(), decOffset--);
+				STentry ste = new STentry(nestingLevel, field.getType(), decOffset);
 				virtualTable.put(field.id, ste);
 				((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+				decOffset--;
 			} else {
 				System.out.println("Id " + field.id + " at line " + field.getLine() + " already declared");
 				stErrors++;
@@ -339,10 +341,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			System.out.println("Field " + n.fieldId + " at line " + n.getLine() + " not declared");
 			stErrors++;
 		} else {
-
 			n.entry = entry;
 			n.nl = nestingLevel;
-
 			STentry methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
 			if (methodEntry != null) {
 				n.methodEntry = methodEntry;

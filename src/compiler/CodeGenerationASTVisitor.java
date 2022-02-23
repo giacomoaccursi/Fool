@@ -332,12 +332,15 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				argCode, // generate code for argument expressions in reversed order
 				"lfp", getAR, // retrieve address of frame containing "id" declaration
 				// by following the static chain (of Access Links)
-				"push "+n.entry.offset, "add", // compute address of "id" declaration
+				"push "+n.entry.offset,
+				"add", // compute address of "id" declaration
 				"lw", // load value of "id" variable
 				"stm", // set $tm to popped value (with the aim of duplicating top of stack)
 				"ltm", // load Access Link (pointer to frame of function "id" declaration)
 				"ltm", // duplicate top of stack
-				"push "+n.methodEntry.offset, "add", // compute address of "id" declaration
+				"lw",
+				"push "+n.methodEntry.offset,
+				"add", // compute address of "id" declaration
 				"lw", // load address of "id" function
 				"js"  // jump to popped address (saving address of subsequent instruction in $ra)
 		);
@@ -348,10 +351,10 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	@Override
 	public String visitNode(CallNode n) {
 		if (print) printNode(n,n.id);
+		String argCode = null, getAR = null;
+		for (int i = n.arglist.size() - 1; i >= 0; i--) argCode = nlJoin(argCode, visit(n.arglist.get(i)));
+		for (int i = 0; i < n.nl - n.entry.nl; i++) getAR = nlJoin(getAR, "lw");
 		if (!(n.entry.type instanceof MethodTypeNode)) {
-			String argCode = null, getAR = null;
-			for (int i = n.arglist.size() - 1; i >= 0; i--) argCode = nlJoin(argCode, visit(n.arglist.get(i)));
-			for (int i = 0; i < n.nl - n.entry.nl; i++) getAR = nlJoin(getAR, "lw");
 			return nlJoin(
 					"lfp", // load Control Link (pointer to frame of function "id" caller)
 					argCode, // generate code for argument expressions in reversed order
@@ -365,20 +368,19 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 					"js"  // jump to popped address (saving address of subsequent instruction in $ra)
 			);
 		} else {
-			String argCode = null, getAR = null;
-			for (int i=n.arglist.size()-1;i>=0;i--) argCode=nlJoin(argCode,visit(n.arglist.get(i)));
-			for (int i = 0;i<n.nl-n.entry.nl;i++) getAR=nlJoin(getAR,"lw");
 			return nlJoin(
 					"lfp", // load Control Link (pointer to frame of function "id" caller)
 					argCode, // generate code for argument expressions in reversed order
 					"lfp", getAR, // retrieve address of frame containing "id" declaration
 					// by following the static chain (of Access Links)
+					"stm",
+					"ltm",
 					"push "+n.entry.offset, "add", // compute address of "id" declaration
 					"lw", // load value of "id" variable
-					"stm", // set $tm to popped value (with the aim of duplicating top of stack)
+					//"stm", // set $tm to popped value (with the aim of duplicating top of stack)
 					"ltm", // load Access Link (pointer to frame of function "id" declaration)
 					"ltm", // duplicate top of stack
-					"push "+n.entry.offset, "add", // compute address of "id" declaration
+					"push "+ (n.entry.offset), "add", // compute address of "id" declaration
 					"lw", // load address of "id" function
 					"js"  // jump to popped address (saving address of subsequent instruction in $ra)
 			);
