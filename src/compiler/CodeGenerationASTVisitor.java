@@ -391,20 +391,20 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		String argCode = null;
 		for (int i=n.argList.size()-1;i>=0;i--) argCode=nlJoin(argCode,visit(n.argList.get(i)));
 		for (int i=n.argList.size()-1;i>=0;i--) argCode=nlJoin(argCode, "lhp", "sw", "lhp", "push 1", "add", "shp");
-		putCode( nlJoin(
+		return nlJoin(
 				argCode,
 				"push " + ExecuteVM.MEMSIZE,
 				"push " + n.entry.offset,
 				"add",
 				"lw",
-				"shp",
+				"lhp",
+				"sw",
 				"lhp",
 				"lhp",
 				"push "+ 1,
 				"add",
 				"shp"
-		));
-		return "pop";
+		);
 	}
 
 	@Override
