@@ -391,8 +391,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	public String visitNode(NewNode n) {
 		if(print) printNode(n, n.classId);
 		String argCode = null;
-		for (int i=n.argList.size()-1;i>=0;i--) argCode=nlJoin(argCode,visit(n.argList.get(i)));
-		for (int i=n.argList.size()-1;i>=0;i--) argCode=nlJoin(argCode, "lhp", "sw", "lhp", "push 1", "add", "shp");
+		for (int i=0;i<n.argList.size();i++) argCode=nlJoin(argCode,visit(n.argList.get(i)));
+		for (int i=0;i<n.argList.size();i++) argCode=nlJoin(argCode, "lhp", "sw", "lhp", "push 1", "add", "shp");
 		return nlJoin(
 				argCode,
 				"push " + ExecuteVM.MEMSIZE,

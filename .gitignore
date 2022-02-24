@@ -2,3 +2,4 @@ out/
 production/
 gen/
 .idea/*
+src/test/*.asm
