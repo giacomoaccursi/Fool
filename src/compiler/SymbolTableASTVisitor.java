@@ -1,7 +1,8 @@
 package compiler;
 
-import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import compiler.AST.*;
 import compiler.exc.*;
 import compiler.lib.*;
@@ -49,8 +50,17 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	public Void visitNode(ClassNode n){
 		if (print) printNode(n);
 		Map<String, STentry> hm = symTable.get(nestingLevel);
-		STentry entry = new STentry(nestingLevel, new ClassTypeNode(new ArrayList<>(), new ArrayList<>()),decOffset--);
+		List<TypeNode> allFields = new ArrayList<>();
+		List<ArrowTypeNode> allMethods = new ArrayList<>();
 		Map<String, STentry> virtualTable = new HashMap<>();
+
+		if (n.superID != null) {
+			allMethods = new ArrayList<>(((ClassTypeNode)hm.get(n.superID).type).allMethods);
+			allFields = new ArrayList<>(((ClassTypeNode)hm.get(n.superID).type).allFields);
+			virtualTable = new HashMap<>(classTable.get(n.superID));
+		}
+		STentry entry = new STentry(nestingLevel, new ClassTypeNode(allFields, allMethods),decOffset--);
+
 		if (hm.put(n.id, entry) != null) {
 			System.out.println("Class id " + n.id + " at line "+ n.getLine() +" already declared");
 			stErrors++;
@@ -64,19 +74,43 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
 
 		List<String> methodsAndFields = new ArrayList<>(); //lista per tenere traccia degli id di metodi e campi dichiarati nella classe
+		List<String> inheritanceFieldsList = virtualTable.entrySet()
+				.stream()
+				.filter(a -> a.getValue().offset < 0)
+				.map(Map.Entry::getKey)
+				.collect(Collectors.toList());
+		List<String> inheritanceMethodsList = virtualTable.entrySet()
+				.stream()
+				.filter(a -> a.getValue().offset >= 0)
+				.map(Map.Entry::getKey)
+				.collect(Collectors.toList());
 
 		this.decOffset = -1;
 		for (FieldNode field : n.fieldList) {
+			//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 			if (!methodsAndFields.contains(field.id)) {
-				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
+				STentry ste;
 				methodsAndFields.add(field.id);
-				STentry ste = new STentry(nestingLevel, field.getType(), decOffset);
-				virtualTable.put(field.id, ste);
-				((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
-				decOffset--;
-			} else {
-				System.out.println("Id " + field.id + " at line " + field.getLine() + " already declared");
-				stErrors++;
+				//ho fatto override, sostituisco la vecchia stentry con la nuova.
+				if(inheritanceFieldsList.contains(field.id)){
+					ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
+					virtualTable.replace(field.id, ste);
+					((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+				}else{
+					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
+					if(inheritanceMethodsList.contains(field.id)){
+						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override method");
+						stErrors++;
+					}else{
+						ste = new STentry(nestingLevel, field.getType(), decOffset);
+						virtualTable.put(field.id, ste);
+						decOffset--;
+						((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+					}
+				}
+			} else{
+					System.out.println("Id " + field.id + " at line " + field.getLine() + " already declared");
+					stErrors++;
 			}
 		}
 		this.decOffset = 0;

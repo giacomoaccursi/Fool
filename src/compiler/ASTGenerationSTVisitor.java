@@ -62,7 +62,11 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	public Node visitCldec(CldecContext c) {
 		if (print) printVarAndProdName(c);
 		List<FieldNode> fieldList = new ArrayList<>();
-		for (int i = 1; i < c.ID().size(); i++) {
+		int firstFieldId = 1;
+		if (c.EXTENDS() != null){
+			firstFieldId++;
+		}
+		for (int i = firstFieldId; i < c.ID().size(); i++) {
 			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-1))); //i-1 perchè il for inizia da 1 pr saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
 			f.setLine(c.ID(i).getSymbol().getLine());
 			fieldList.add(f);
@@ -73,7 +77,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		}
 		Node n = null;
 		if (c.ID().size() > 0) {
-			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
+			n = new ClassNode(c.ID(0).getText(), fieldList, methodList, c.EXTENDS() == null ? c.ID(1).getText() : null);
 			n.setLine(c.CLASS().getSymbol().getLine());
 		}
 		return n;

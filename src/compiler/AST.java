@@ -53,10 +53,12 @@ public class AST {
 		final String id;
 		final List<FieldNode> fieldList;
 		final List<MethodNode> methodList;
-		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods ) {
+		final String superID;
+		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods, String superID) {
 			id=i;
 			this.fieldList=Collections.unmodifiableList(fields);
 			this.methodList=Collections.unmodifiableList(methods);
+			this.superID = superID;
 		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
