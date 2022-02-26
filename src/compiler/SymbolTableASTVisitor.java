@@ -97,10 +97,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 					ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
 					virtualTable.replace(field.id, ste);
 					((ClassTypeNode) entry.type).allFields.set(-ste.offset-1, ste.type);
-//					if (n.id.equals("MyBankLoan")){
-//						RefTypeNode a = (RefTypeNode)((ClassTypeNode) entry.type).allFields.get(0);
-//						System.out.println("LOG: "+ a.idNode.id);
-//					}
+
 				}else{
 					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
 					if(inheritanceMethodsList.contains(field.id)){
@@ -144,12 +141,18 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		Map<String, STentry> hm = symTable.get(nestingLevel);
 		List<TypeNode> parTypes = new ArrayList<>();
 		for (ParNode par : n.parlist) parTypes.add(par.getType());
-		n.offset = decOffset++;
-		STentry entry = new STentry(nestingLevel, new MethodTypeNode(new ArrowTypeNode(parTypes, n.retType)), n.offset);
-		if (hm.put(n.id, entry) != null) {
-			int oldOffset = hm.get(n.id).offset;
-			hm.replace(n.id, new STentry(entry.nl,entry.type,oldOffset));
+
+		STentry entry = null;
+		int methodOffset;
+		if (hm.containsKey(n.id)){
+			methodOffset = hm.get(n.id).offset;
+		} else {
+			methodOffset = decOffset++;
 		}
+		entry = new STentry(nestingLevel, new MethodTypeNode(new ArrowTypeNode(parTypes, n.retType)), methodOffset);
+		n.offset = methodOffset;
+		hm.put(n.id, entry);
+
 		//creare una nuova hashmap per la symTable
 		nestingLevel++;
 		Map<String, STentry> hmn = new HashMap<>();

@@ -57,7 +57,11 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		String labels = null;
 		for (MethodNode method : n.methodList){
 			visit(method);
-			dispatchTable.add(method.offset, method.label);
+			if( method.offset >= dispatchTable.size() ){
+				dispatchTable.add(method.offset, method.label);
+			} else {
+				dispatchTable.set(method.offset, method.label);
+			}
 		}
 		dispatchTables.add(dispatchTable);
 		for (String s : dispatchTable){
