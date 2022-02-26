@@ -73,7 +73,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		symTable.add(virtualTable);
 		nestingLevel++;
 		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
-		List<String> methodsAndFields = new ArrayList<>(); //lista per tenere traccia degli id di metodi e campi dichiarati nella classe
+		Set<String> methodsAndFields = new HashSet<>(); //lista per tenere traccia degli id di metodi e campi dichiarati nella classe
 		this.decOffset = n.superID != null ? - superClassType.allFields.size() -1 : -1 ;
 		for (FieldNode field : n.fieldList) {
 			//se l'id del campo non è già presente allora posso aggiungerlo nella tabella

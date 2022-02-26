@@ -26,8 +26,6 @@ public class TypeRels {
 	}
 
 	private static boolean checkParametersSubtyping(List<TypeNode> a, List<TypeNode> b){
-		Map<TypeNode, TypeNode> map = new HashMap<>();
-		IntStream.range(0, a.size()).forEach( i ->  map.put(a.get(i), b.get(i)) );
-		return map.entrySet().stream().allMatch(it -> TypeRels.isSubtype(it.getValue(), it.getKey()));
+		return IntStream.range(0, a.size()).allMatch(i -> TypeRels.isSubtype(b.get(i), a.get(i)));
 	}
 }
