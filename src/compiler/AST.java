@@ -54,6 +54,7 @@ public class AST {
 		final List<FieldNode> fieldList;
 		final List<MethodNode> methodList;
 		final String superID;
+		STentry superEntry;
 		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods, String superID) {
 			id=i;
 			this.fieldList=Collections.unmodifiableList(fields);

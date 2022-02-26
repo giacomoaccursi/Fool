@@ -3,6 +3,13 @@ package compiler;
 import compiler.AST.*;
 import compiler.exc.*;
 import compiler.lib.*;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
+
 import static compiler.TypeRels.*;
 
 //visitNode(n) fa il type checking di un Node n e ritorna:
@@ -44,13 +51,30 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(ClassNode n) throws TypeException {
 		if (print) printNode(n);
-		for (Node method : n.methodList){
+		if ( n.superID != null) {
+			superType.put(n.id, n.superID);
+		}
+		for (Node method : n.methodList) {
 			try {
 				visit(method);
 			} catch (IncomplException e) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a method: " + e.text);
 			}
+		}
+		if ( n.superID != null ) {
+			List<TypeNode> myFields = ((ClassTypeNode)n.getType()).allFields;
+			List<TypeNode> superFields = ((ClassTypeNode)n.superEntry.type).allFields;
+			List<ArrowTypeNode> myMethods = ((ClassTypeNode)n.getType()).allMethods;
+			List<ArrowTypeNode> superMethods = ((ClassTypeNode)n.superEntry.type).allMethods;
+
+			if (! IntStream.range(0, myFields.size()).allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
+				System.out.println("Type checking error in field overriding");
+			}
+			if (! IntStream.range(0, myMethods.size()).allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
+				System.out.println("Type checking error in method overriding");
+			}
+
 		}
 		return null;
 	}

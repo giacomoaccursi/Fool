@@ -58,6 +58,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			allMethods = new ArrayList<>(((ClassTypeNode)hm.get(n.superID).type).allMethods);
 			allFields = new ArrayList<>(((ClassTypeNode)hm.get(n.superID).type).allFields);
 			virtualTable = new HashMap<>(classTable.get(n.superID));
+			n.superEntry = symTable.get(0).get(n.superID);
 		}
 		STentry entry = new STentry(nestingLevel, new ClassTypeNode(allFields, allMethods),decOffset--);
 
@@ -85,7 +86,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				.map(Map.Entry::getKey)
 				.collect(Collectors.toList());
 
-		this.decOffset = -1;
+		this.decOffset = n.superID != null ? - ((ClassTypeNode) n.superEntry.type).allFields.size() -1 : -1 ;
 		for (FieldNode field : n.fieldList) {
 			//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 			if (!methodsAndFields.contains(field.id)) {
@@ -113,13 +114,15 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 					stErrors++;
 			}
 		}
-		this.decOffset = 0;
+		this.decOffset = ( n.superID != null ? ((ClassTypeNode) n.superEntry.type).allMethods.size()  : 0);
 		for (MethodNode method : n.methodList){
 			if (!methodsAndFields.contains(method.id)) {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(method.id);
+				if (n.superID != null && inheritanceFieldsList.contains(method.id)){
+					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override field");
+				}
 				visit(method);
-				//((ClassTypeNode)entry.type).allMethods.add(((MethodTypeNode)method.getType()).fun);
 				((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
 			}else{
 				System.out.println("Id " + method.id + " at line "+ method.getLine() +" already declared");
@@ -140,8 +143,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		n.offset = decOffset++;
 		STentry entry = new STentry(nestingLevel, new MethodTypeNode(new ArrowTypeNode(parTypes, n.retType)), n.offset);
 		if (hm.put(n.id, entry) != null) {
-			System.out.println("Method id " + n.id + " at line " + n.getLine() + " already declared");
-			stErrors++;
+			int oldOffset = hm.get(n.id).offset;
+			hm.replace(n.id, new STentry(entry.nl,entry.type,oldOffset));
 		}
 		//creare una nuova hashmap per la symTable
 		nestingLevel++;
@@ -377,6 +380,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		} else {
 			n.entry = entry;
 			n.nl = nestingLevel;
+			System.out.println("XXX" +((RefTypeNode) n.entry.type));
+
 			STentry methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
 			if (methodEntry != null) {
 				n.methodEntry = methodEntry;
