@@ -201,8 +201,6 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return n;
 	}
 
-
-
 	@Override
 	public Node visitIntType(IntTypeContext c) {
 		if (print) printVarAndProdName(c);
