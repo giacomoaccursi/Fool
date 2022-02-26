@@ -60,8 +60,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			virtualTable = new HashMap<>(classTable.get(n.superID));
 			n.superEntry = symTable.get(0).get(n.superID);
 		}
-		STentry entry = new STentry(nestingLevel, new ClassTypeNode(allFields, allMethods),decOffset--);
 
+		STentry entry = new STentry(nestingLevel, new ClassTypeNode(allFields, allMethods),decOffset--);
 		if (hm.put(n.id, entry) != null) {
 			System.out.println("Class id " + n.id + " at line "+ n.getLine() +" already declared");
 			stErrors++;
@@ -96,8 +96,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				if(inheritanceFieldsList.contains(field.id)){
 					ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
 					virtualTable.replace(field.id, ste);
-					((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+					//((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+//					if (n.id.equals("MyBankLoan")){
+//						RefTypeNode a = (RefTypeNode)((ClassTypeNode) entry.type).allFields.get(0);
+//						System.out.println("LOG: "+ a.idNode.id);
+//					}
 				}else{
+
 					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
 					if(inheritanceMethodsList.contains(field.id)){
 						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override method");
@@ -114,6 +119,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 					stErrors++;
 			}
 		}
+
 		this.decOffset = ( n.superID != null ? ((ClassTypeNode) n.superEntry.type).allMethods.size()  : 0);
 		for (MethodNode method : n.methodList){
 			if (!methodsAndFields.contains(method.id)) {
@@ -123,7 +129,9 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override field");
 				}
 				visit(method);
-				((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
+				if (n.superID == null) {
+					((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
+				}
 			}else{
 				System.out.println("Id " + method.id + " at line "+ method.getLine() +" already declared");
 				stErrors++;
@@ -380,16 +388,16 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		} else {
 			n.entry = entry;
 			n.nl = nestingLevel;
-			STentry methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
-			if (methodEntry != null) {
-				n.methodEntry = methodEntry;
-			}else{
-				System.out.println("Method " + n.methodId + " at line " + n.getLine() + " not declared in class " + ((RefTypeNode) n.entry.type).idNode.id);
+			if (!(classTable.get(((RefTypeNode) n.entry.type).idNode.id).containsKey(n.methodId))) {
+				System.out.println("Method " + n.methodId + " not declared for object of class " + ((RefTypeNode) n.entry.type).idNode.id + " at line " + n.getLine());
 				stErrors++;
+			} else {
+				n.methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
 			}
-		}
-		for(Node arg : n.arglist){
-			visit(arg);
+
+			for (Node arg : n.arglist) {
+				visit(arg);
+			}
 		}
 		return null;
 	}

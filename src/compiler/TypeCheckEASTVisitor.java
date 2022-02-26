@@ -68,10 +68,11 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			List<ArrowTypeNode> myMethods = ((ClassTypeNode)n.getType()).allMethods;
 			List<ArrowTypeNode> superMethods = ((ClassTypeNode)n.superEntry.type).allMethods;
 
-			if (! IntStream.range(0, myFields.size()).allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
+
+			if (! IntStream.range(0, superFields.size()).allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
 				System.out.println("Type checking error in field overriding");
 			}
-			if (! IntStream.range(0, myMethods.size()).allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
+			if (! IntStream.range(0, superMethods.size()).allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
 				System.out.println("Type checking error in method overriding");
 			}
 

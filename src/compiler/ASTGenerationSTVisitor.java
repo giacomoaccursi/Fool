@@ -67,7 +67,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 			firstFieldId++;
 		}
 		for (int i = firstFieldId; i < c.ID().size(); i++) {
-			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-1))); //i-1 perchè il for inizia da 1 pr saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
+			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-firstFieldId))); //i-1 perchè il for inizia da 1 pr saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
 			f.setLine(c.ID(i).getSymbol().getLine());
 			fieldList.add(f);
 		}

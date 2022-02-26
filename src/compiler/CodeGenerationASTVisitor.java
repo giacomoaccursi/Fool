@@ -14,6 +14,8 @@ import static compiler.lib.FOOLlib.*;
 
 public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidException> {
 
+	private List<List<String>> dispatchTables = new ArrayList<>();
+
   CodeGenerationASTVisitor() {}
   CodeGenerationASTVisitor(boolean debug) {super(false,debug);} //enables print for debugging
 
@@ -46,12 +48,18 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	@Override
 	public String visitNode(ClassNode n){
 		if (print) printNode(n, n.id);
-		List<String> dispatchTable = new ArrayList<>();
+		List<String> dispatchTable;
+		if (n.superID == null) {
+			dispatchTable =new ArrayList<>();
+		} else {
+			dispatchTable = dispatchTables.get(-n.superEntry.offset-2);
+		}
 		String labels = null;
 		for (MethodNode method : n.methodList){
 			visit(method);
 			dispatchTable.add(method.offset, method.label);
 		}
+		dispatchTables.add(dispatchTable);
 		for (String s : dispatchTable){
 			labels = nlJoin(labels,"push " + s, "lhp", "sw", "lhp", "push 1", "add", "shp");
 		}
