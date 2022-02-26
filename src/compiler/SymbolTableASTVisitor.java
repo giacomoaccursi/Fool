@@ -380,8 +380,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		} else {
 			n.entry = entry;
 			n.nl = nestingLevel;
-			System.out.println("XXX" +((RefTypeNode) n.entry.type));
-
 			STentry methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
 			if (methodEntry != null) {
 				n.methodEntry = methodEntry;
