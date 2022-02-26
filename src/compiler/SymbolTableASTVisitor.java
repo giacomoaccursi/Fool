@@ -96,21 +96,19 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				if(inheritanceFieldsList.contains(field.id)){
 					ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
 					virtualTable.replace(field.id, ste);
-					//((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
+					((ClassTypeNode) entry.type).allFields.set(-ste.offset-1, ste.type);
 //					if (n.id.equals("MyBankLoan")){
 //						RefTypeNode a = (RefTypeNode)((ClassTypeNode) entry.type).allFields.get(0);
 //						System.out.println("LOG: "+ a.idNode.id);
 //					}
 				}else{
-
 					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
 					if(inheritanceMethodsList.contains(field.id)){
 						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override method");
 						stErrors++;
 					}else{
-						ste = new STentry(nestingLevel, field.getType(), decOffset);
+						ste = new STentry(nestingLevel, field.getType(), decOffset--);
 						virtualTable.put(field.id, ste);
-						decOffset--;
 						((ClassTypeNode) entry.type).allFields.add(-ste.offset-1, ste.type);
 					}
 				}
@@ -129,9 +127,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override field");
 				}
 				visit(method);
-				if (n.superID == null) {
-					((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
-				}
+				((ClassTypeNode)entry.type).allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
 			}else{
 				System.out.println("Id " + method.id + " at line "+ method.getLine() +" already declared");
 				stErrors++;

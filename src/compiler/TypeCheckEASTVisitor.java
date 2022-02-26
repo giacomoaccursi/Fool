@@ -52,7 +52,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	public TypeNode visitNode(ClassNode n) throws TypeException {
 		if (print) printNode(n);
 		if ( n.superID != null) {
-			superType.put(n.id, n.superID);
+			TypeRels.superType.put(n.id, n.superID);
 		}
 		for (Node method : n.methodList) {
 			try {
