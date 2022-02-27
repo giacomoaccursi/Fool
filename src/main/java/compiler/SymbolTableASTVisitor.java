@@ -70,8 +70,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			stErrors++;
 		}
 		classTable.put(n.id, virtualTable);
-		symTable.add(virtualTable);
 		nestingLevel++;
+		symTable.add(virtualTable);
 		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
 		Set<String> methodsAndFields = new HashSet<>(); //lista per tenere traccia degli id di metodi e campi dichiarati nella classe
 		this.decOffset = n.superID != null ? - superClassType.allFields.size() -1 : -1 ;
@@ -89,7 +89,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				}else{
 					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
 					if(field.getType() instanceof MethodTypeNode){
-						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override method");
+						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override a method of the superclass");
 						stErrors++;
 					}else{
 						ste = new STentry(nestingLevel, field.getType(), decOffset--);
@@ -108,7 +108,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(method.id);
 				if (n.superID != null && !(method.getType() instanceof MethodTypeNode)){
-					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override field");
+					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override a field of the superclass");
+					System.out.println("type: " + method.retType);
 				}
 				visit(method);
 				classType.allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);

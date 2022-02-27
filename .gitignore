@@ -1,5 +1,10 @@
 out/
 production/
-gen/
+src/main/gen/
 .idea/*
-res/*.asm
+src/test/resources/*.asm
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

@@ -3,12 +3,10 @@ package compiler;
 import compiler.AST.*;
 import compiler.lib.*;
 import compiler.exc.*;
-//import svm.ExecuteVM;
-import visualsvm.*;
+import svm.ExecuteVM;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.SubmissionPublisher;
 
 import static compiler.lib.FOOLlib.*;
 
