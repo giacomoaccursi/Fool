@@ -109,7 +109,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				methodsAndFields.add(method.id);
 				if (n.superID != null && !(method.getType() instanceof MethodTypeNode)){
 					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override a field of the superclass");
-					System.out.println("type: " + method.retType);
 				}
 				visit(method);
 				classType.allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
