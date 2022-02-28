@@ -1,23 +1,16 @@
 package compiler;
 
 import compiler.AST.*;
-import compiler.exc.*;
-import compiler.lib.*;
-
-import java.awt.*;
-import java.util.HashMap;
+import compiler.exc.IncomplException;
+import compiler.exc.TypeException;
+import compiler.lib.BaseEASTVisitor;
+import compiler.lib.Node;
+import compiler.lib.TypeNode;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
-import static compiler.TypeRels.*;
+import static compiler.TypeRels.isSubtype;
 
-//visitNode(n) fa il type checking di un Node n e ritorna:
-//- per una espressione, il suo tipo (oggetto BoolTypeNode o IntTypeNode)
-//- per una dichiarazione, "null"; controlla la correttezza interna della dichiarazione
-//(- per un tipo: "null"; controlla che il tipo non sia incompleto) 
-//
-//visitSTentry(s) ritorna, per una STentry s, il tipo contenuto al suo interno
 public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException> {
 
 	TypeCheckEASTVisitor() { super(true); } // enables incomplete tree exceptions 
@@ -35,15 +28,14 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		for (Node cl : n.classList)
 			try {
 				visit(cl);
-			} catch (IncomplException e) {
+			} catch (IncomplException ignored) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
-
 		for (Node dec : n.declist)
 			try {
 				visit(dec);
-			} catch (IncomplException e) { 
+			} catch (IncomplException ignored) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
@@ -65,26 +57,25 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		for (Node method : n.methodList) {
 			try {
 				visit(method);
-			} catch (IncomplException e) {
+			} catch (IncomplException ignored) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a method: " + e.text);
 			}
 		}
-
 		if ( n.superID != null ) {
 			List<TypeNode> myFields = ((ClassTypeNode)n.getType()).allFields;
 			List<TypeNode> superFields = ((ClassTypeNode)n.superEntry.type).allFields;
 			List<ArrowTypeNode> myMethods = ((ClassTypeNode)n.getType()).allMethods;
 			List<ArrowTypeNode> superMethods = ((ClassTypeNode)n.superEntry.type).allMethods;
 
-			System.out.println("class = "  + n.id + " size = " + myMethods.size());
-			System.out.println("class = "  + n.superID + " size = " + superMethods.size());
-
-
-			if (! IntStream.range(0, superFields.size()).allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
+			if (! IntStream.range(0, superFields.size())
+					.filter((i) -> superFields.contains(myFields.get(i)))
+					.allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
 				System.out.println("Type checking error in field overriding");
 			}
-			if (! IntStream.range(0, superMethods.size()).allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
+			if (! IntStream.range(0, superMethods.size())
+					.filter((i) -> superMethods.contains(myMethods.get(i)))
+					.allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
 				System.out.println("Type checking error in method overriding");
 			}
 		}
@@ -112,7 +103,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		for (Node dec : n.declist)
 			try {
 				visit(dec);
-			} catch (IncomplException e) {
+			} catch (IncomplException ignored) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
@@ -127,7 +118,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		for (Node dec : n.declist)
 			try {
 				visit(dec);
-			} catch (IncomplException e) { 
+			} catch (IncomplException ignored) {
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
@@ -283,7 +274,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		TypeNode t = visit(n.entry);
 		if( !(t instanceof ClassTypeNode)){
 			throw new TypeException("Invocation of a non-class "+ n.classId, n.getLine());
-
 		}
 		ClassTypeNode ct = (ClassTypeNode) t;
 		if (!(ct.allFields.size() == n.argList.size())){
@@ -296,7 +286,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		}
 		return new RefTypeNode(new IdNode(n.classId));
 	}
-
 
 	@Override
 	public TypeNode visitNode(IdNode n) throws TypeException {
@@ -319,8 +308,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return new IntTypeNode();
 	}
 
-// gestione tipi incompleti	(se lo sono lancia eccezione)
-	
 	@Override
 	public TypeNode visitNode(ArrowTypeNode n) throws TypeException {
 		if (print) printNode(n);
@@ -359,16 +346,11 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return null;
 	}
 
-
 	@Override
 	public TypeNode visitNode(EmptyNode n) {
 		if (print) printNode(n);
 		return new EmptyTypeNode();
 	}
-
-
-
-// STentry (ritorna campo type)
 
 	@Override
 	public TypeNode visitSTentry(STentry entry) throws TypeException {
