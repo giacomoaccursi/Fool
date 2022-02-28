@@ -6,6 +6,8 @@ import compiler.exc.TypeException;
 import compiler.lib.BaseEASTVisitor;
 import compiler.lib.Node;
 import compiler.lib.TypeNode;
+
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -51,9 +53,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(ClassNode n) throws TypeException {
 		if (print) printNode(n);
-		if ( n.superID != null) {
-			TypeRels.superType.put(n.id, n.superID);
-		}
+		int position;
 		for (Node method : n.methodList) {
 			try {
 				visit(method);
@@ -63,20 +63,24 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			}
 		}
 		if ( n.superID != null ) {
+			TypeRels.superType.put(n.id, n.superID);
 			List<TypeNode> myFields = ((ClassTypeNode)n.getType()).allFields;
 			List<TypeNode> superFields = ((ClassTypeNode)n.superEntry.type).allFields;
 			List<ArrowTypeNode> myMethods = ((ClassTypeNode)n.getType()).allMethods;
 			List<ArrowTypeNode> superMethods = ((ClassTypeNode)n.superEntry.type).allMethods;
-
-			if (! IntStream.range(0, superFields.size())
-					.filter((i) -> superFields.contains(myFields.get(i)))
-					.allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
-				System.out.println("Type checking error in field overriding");
+			for(FieldNode field : n.fieldList){
+				position = - field.offset - 1;
+				if (position < superFields.size() &&
+					!(isSubtype(myFields.get(position), superFields.get(position)))){
+						System.out.println("Type checking error in field overriding");
+				}
 			}
-			if (! IntStream.range(0, superMethods.size())
-					.filter((i) -> superMethods.contains(myMethods.get(i)))
-					.allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
-				System.out.println("Type checking error in method overriding");
+			for(MethodNode method : n.methodList){
+				position = method.offset;
+				if (position < superMethods.size() &&
+					!(isSubtype(myMethods.get(position), superMethods.get(position)))){
+						System.out.println("Type checking error in method overriding");
+				}
 			}
 		}
 		return null;
