@@ -84,6 +84,7 @@ public class AST {
 
 	public static class FieldNode extends DecNode {
 		final String id;
+		int offset;
 		FieldNode(String i, TypeNode t) {id = i; type = t;}
 
 		@Override

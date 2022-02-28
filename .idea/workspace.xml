@@ -5,41 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/lib/DecNode.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/lib/DecNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fool.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/antlr4-runtime-4.9.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/bankloan.fool" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/prova.fool" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/prova2.fool" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/prova3.fool" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/quicksort.fool" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/AST.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/ASTGenerationSTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/CodeGenerationASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/FOOL.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/PrintEASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/STentry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/SymbolTableASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TypeCheckEASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TypeRels.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/exc/IncomplException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/exc/TypeException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/exc/UnimplException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/exc/VoidException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/BaseASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/BaseEASTVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/DecNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/FOOLlib.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/TypeNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/lib/Visitable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/svm/ExecuteVM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/svm/SVM.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/quicksort.fool.asm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualsvm/ExecuteVM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualsvm/SVM.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/AST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/lib/DecNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/lib/DecNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,25 +45,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Fool" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Fool" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Fool" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Fool" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -105,7 +62,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>

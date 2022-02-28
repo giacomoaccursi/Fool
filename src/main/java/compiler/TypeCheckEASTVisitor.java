@@ -32,6 +32,14 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(ProgLetInNode n) throws TypeException {
 		if (print) printNode(n);
+		for (Node cl : n.classList)
+			try {
+				visit(cl);
+			} catch (IncomplException e) {
+			} catch (TypeException e) {
+				System.out.println("Type checking error in a declaration: " + e.text);
+			}
+
 		for (Node dec : n.declist)
 			try {
 				visit(dec);
@@ -62,11 +70,15 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				System.out.println("Type checking error in a method: " + e.text);
 			}
 		}
+
 		if ( n.superID != null ) {
 			List<TypeNode> myFields = ((ClassTypeNode)n.getType()).allFields;
 			List<TypeNode> superFields = ((ClassTypeNode)n.superEntry.type).allFields;
 			List<ArrowTypeNode> myMethods = ((ClassTypeNode)n.getType()).allMethods;
 			List<ArrowTypeNode> superMethods = ((ClassTypeNode)n.superEntry.type).allMethods;
+
+			System.out.println("class = "  + n.id + " size = " + myMethods.size());
+			System.out.println("class = "  + n.superID + " size = " + superMethods.size());
 
 
 			if (! IntStream.range(0, superFields.size()).allMatch(i -> TypeRels.isSubtype(myFields.get(i), superFields.get(i))) ){
@@ -75,7 +87,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			if (! IntStream.range(0, superMethods.size()).allMatch(i -> TypeRels.isSubtype(myMethods.get(i), superMethods.get(i))) ){
 				System.out.println("Type checking error in method overriding");
 			}
-
 		}
 		return null;
 	}
