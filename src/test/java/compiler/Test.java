@@ -16,7 +16,4 @@ public class Test {
     public void testInheritance() throws IOException {
         foolTester.runProgram(resourceDir + "bankloan.fool");
     }
-
-
-
 }

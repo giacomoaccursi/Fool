@@ -1,6 +1,7 @@
 package compiler;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import compiler.AST.*;
 import compiler.exc.*;
@@ -81,21 +82,19 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				STentry ste;
 				methodsAndFields.add(field.id);
 				//ho fatto override, sostituisco la vecchia stentry con la nuova.
-				//if(inheritanceFieldsList.contains(field.id)){
-				if(virtualTable.get(field.id) != null){
-					ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
-					virtualTable.replace(field.id, ste);
-					classType.allFields.set(-ste.offset-1, ste.type);
-				}else{
-					//se non è override di un campo, devo capire se è un nuovo campo o sto cercando di fare override di un metodo
-					if(field.getType() instanceof MethodTypeNode){
+				if (virtualTable.get(field.id) != null ) {
+					if (! (virtualTable.get(field.id).type instanceof MethodTypeNode)){
+						ste = new STentry(nestingLevel, field.getType(), virtualTable.get(field.id).offset);
+						virtualTable.replace(field.id, ste);
+						classType.allFields.set(-ste.offset-1, ste.type);
+					} else {
 						System.out.println("field " + field.id + " at line " + field.getLine() + " can't override a method of the superclass");
 						stErrors++;
-					}else{
-						ste = new STentry(nestingLevel, field.getType(), decOffset--);
-						virtualTable.put(field.id, ste);
-						classType.allFields.add(-ste.offset-1, ste.type);
 					}
+				} else{
+					ste = new STentry(nestingLevel, field.getType(), decOffset--);
+					virtualTable.put(field.id, ste);
+					classType.allFields.add(-ste.offset-1, ste.type);
 				}
 			} else{
 					System.out.println("Id " + field.id + " at line " + field.getLine() + " already declared");
@@ -107,8 +106,11 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			if (!methodsAndFields.contains(method.id)) {
 				//se l'id del campo non è già presente allora posso aggiungerlo nella tabella
 				methodsAndFields.add(method.id);
-				if (n.superID != null && !(method.getType() instanceof MethodTypeNode)){
-					System.out.println("method " + method.id + " at line " + method.getLine() + " can't override a field of the superclass");
+				if (virtualTable.containsKey(method.id)) {
+					if (n.superID != null && !(virtualTable.get(method.id).type instanceof  MethodTypeNode)) {
+						System.out.println("method " + method.id + " at line " + method.getLine() + " can't override a field of the superclass");
+						stErrors++;
+					}
 				}
 				visit(method);
 				classType.allMethods.add(method.offset, ((MethodTypeNode)(symTable.get(nestingLevel).get(method.id).type)).fun);
