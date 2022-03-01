@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static compiler.TypeRels.isSubtype;
+import static compiler.TypeRels.lowestCommonAncestor;
 
 public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException> {
 
@@ -72,14 +73,14 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				position = - field.offset - 1;
 				if (position < superFields.size() &&
 					!(isSubtype(myFields.get(position), superFields.get(position)))){
-						System.out.println("Type checking error in field overriding");
+						System.out.println("Type checking error in field overriding. Class = " + n.id);
 				}
 			}
 			for(MethodNode method : n.methodList){
 				position = method.offset;
 				if (position < superMethods.size() &&
 					!(isSubtype(myMethods.get(position), superMethods.get(position)))){
-						System.out.println("Type checking error in method overriding");
+						System.out.println("Type checking error in method overriding. Class = " + n.id);
 				}
 			}
 		}
@@ -152,9 +153,11 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			throw new TypeException("Non boolean condition in if",n.getLine());
 		TypeNode t = visit(n.th);
 		TypeNode e = visit(n.el);
-		if (isSubtype(t, e)) return e;
-		if (isSubtype(e, t)) return t;
-		throw new TypeException("Incompatible types in then-else branches",n.getLine());
+		TypeNode ancestor = lowestCommonAncestor(t, e);
+		if (ancestor == null)
+			throw new TypeException("Incompatible types in then-else branches", n.getLine());
+		else
+			return ancestor;
 	}
 
 	@Override
@@ -288,7 +291,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				throw new TypeException("Wrong type for "+(i+1)+"-th field in the invocation of "+n.classId,n.getLine());
 			}
 		}
-		return new RefTypeNode(new IdNode(n.classId));
+		return new RefTypeNode(new IdNode(n.classId).id);
 	}
 
 	@Override

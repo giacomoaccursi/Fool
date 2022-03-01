@@ -380,11 +380,11 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		} else {
 			n.entry = entry;
 			n.nl = nestingLevel;
-			if (!(classTable.get(((RefTypeNode) n.entry.type).idNode.id).containsKey(n.methodId))) {
-				System.out.println("Method " + n.methodId + " not declared for object of class " + ((RefTypeNode) n.entry.type).idNode.id + " at line " + n.getLine());
+			if (!(classTable.get(((RefTypeNode) n.entry.type).id).containsKey(n.methodId))) {
+				System.out.println("Method " + n.methodId + " not declared for object of class " + ((RefTypeNode) n.entry.type).id + " at line " + n.getLine());
 				stErrors++;
 			} else {
-				n.methodEntry = classTable.get(((RefTypeNode) n.entry.type).idNode.id).get(n.methodId);
+				n.methodEntry = classTable.get(((RefTypeNode) n.entry.type).id).get(n.methodId);
 			}
 
 			for (Node arg : n.arglist) {

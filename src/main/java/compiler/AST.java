@@ -343,9 +343,9 @@ public class AST {
 	}
 
 	public static class RefTypeNode extends TypeNode {
-		IdNode idNode;
-		RefTypeNode(IdNode idNode) {
-			this.idNode= idNode;
+		String id;
+		RefTypeNode(String id) {
+			this.id = id;
 		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}

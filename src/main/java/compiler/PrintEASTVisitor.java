@@ -230,7 +230,7 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void,VoidException> {
 
 	@Override
 	public Void visitNode(RefTypeNode n){
-		printNode(n, n.idNode.id);
+		printNode(n, n.id);
 		return null;
 	}
 

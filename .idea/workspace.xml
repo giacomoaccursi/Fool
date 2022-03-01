@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="Changes">
+    <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/PrintEASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/PrintEASTVisitor.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
       <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeRels.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeRels.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/java/compiler/Test.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/java/compiler/Test.java" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/bankloan.fool" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/bankloan.fool" afterDir="false" />
+      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/listif.fool" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/listif.fool" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/AST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/PrintEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/PrintEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/TypeRels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/compiler/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/compiler/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/bankloan.fool" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/bankloan.fool" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/listif.fool" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/listif.fool" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +94,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.123076916" />
     <property name="project.structure.side.proportion" value="0.56907475" />
@@ -84,10 +102,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Test.testInheritance">
+  <component name="RunManager" selected="Gradle.Test">
     <configuration name="Fool [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -195,8 +214,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Test.testInheritance" />
         <item itemvalue="Gradle.Test" />
+        <item itemvalue="Gradle.Test.testInheritance" />
         <item itemvalue="Gradle.Test.testObjectOrientation" />
         <item itemvalue="Gradle.Fool [test]" />
         <item itemvalue="Gradle.Fool [build]" />
