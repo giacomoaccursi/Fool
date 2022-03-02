@@ -2,15 +2,18 @@ package compiler;
 
 import java.util.*;
 
-import compiler.exc.UnimplException;
 import compiler.lib.*;
 
+/**
+ * Contiene le classi per i nodi dell'albero sintattico.
+ */
 public class AST {
 	
 	public static class ProgLetInNode extends Node {
 		final List<DecNode> declist;
 		final List<ClassNode> classList;
 		final Node exp;
+
 		ProgLetInNode(List<ClassNode> c, List<DecNode> d, Node e) {
 			declist = Collections.unmodifiableList(d);
 			classList = Collections.unmodifiableList(c);
@@ -42,9 +45,7 @@ public class AST {
 	    	declist=Collections.unmodifiableList(dl); 
 	    	exp=e;
 	    }
-		
-		//void setType(TypeNode t) {type = t;}
-		
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
@@ -53,8 +54,8 @@ public class AST {
 		final String id;
 		final List<FieldNode> fieldList;
 		final List<MethodNode> methodList;
-		final String superID;
-		STentry superEntry;
+		final String superID; //nome della classe ereditata.
+		STentry superEntry; //entry della classe ereditata.
 		ClassNode(String i, List<FieldNode> fields, List<MethodNode> methods, String superID) {
 			id=i;
 			this.fieldList=Collections.unmodifiableList(fields);
@@ -65,6 +66,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// Parametro di una funzione.
 	public static class ParNode extends DecNode {
 		final String id;
 		ParNode(String i, TypeNode t) {id = i; type = t;}
@@ -84,7 +86,7 @@ public class AST {
 
 	public static class FieldNode extends DecNode {
 		final String id;
-		int offset;
+		int offset; //necessario per ottimizzare type checking nell'ovverride di campi.
 		FieldNode(String i, TypeNode t) {id = i; type = t;}
 
 		@Override
@@ -97,8 +99,8 @@ public class AST {
 		final List<ParNode> parlist;
 		final List<DecNode> declist;
 		final Node exp;
-		String label;
-		int offset;
+		String label; //label assegnata al metodo per l'assembly.
+		int offset; // posizione del metodo nell'heap a seconda del Dispatch Pointer.
 		MethodNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
 			id=i;
 			retType=rt;
@@ -106,8 +108,6 @@ public class AST {
 			declist=Collections.unmodifiableList(dl);
 			exp=e;
 		}
-
-		//void setType(TypeNode t) {type = t;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
@@ -218,9 +218,10 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// chiamata di una funzione.
 	public static class CallNode extends DecNode {
 		final String id;
-		final List<Node> arglist;
+		final List<Node> arglist; //argomenti della funzione.
 		STentry entry;
 		int nl;
 		CallNode(String i, List<Node> p) {
@@ -232,13 +233,14 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	//chiamata di un oggetto di una classe.
 	public static class ClassCallNode extends Node {
-		final String fieldId;
-		final String methodId;
-		final List<Node> arglist;
-		STentry entry;
-		STentry methodEntry;
-		int nl;
+		final String fieldId; // nome dell'oggetto.
+		final String methodId; // metodo chiamato.
+		final List<Node> arglist; // argomenti del metodo.
+		STentry entry; // entry dell'oggetto.
+		STentry methodEntry; // entry del metodo.
+		int nl; // nesting level.
 		ClassCallNode(String fID, String mID, List<Node> aList) {
 			fieldId = fID;
 			methodId = mID;
@@ -294,7 +296,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-	//tipo funzionale, contiene dominio e condominio della funzione
+	// tipo funzionale, contiene dominio e condominio della funzione
 	public static class ArrowTypeNode extends TypeNode {
 		final List<TypeNode> parlist;
 		final TypeNode ret;
@@ -319,6 +321,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// Contiene i tipi dei campi e i tipi funzionali dei metodi, inclusi quelli ereditati, in ordine di apparizione.
 	public static class ClassTypeNode extends TypeNode {
 		List<TypeNode> allFields;
 		List<ArrowTypeNode> allMethods;
@@ -331,6 +334,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// Contiene un ArrowTypeNode in quanto anche il metodo è un tipo funzionale (dominio -> codominio).
 	public static class MethodTypeNode extends TypeNode {
 		ArrowTypeNode fun;
 
@@ -342,6 +346,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// contiene l'ID della classe come campo.
 	public static class RefTypeNode extends TypeNode {
 		String id;
 		RefTypeNode(String id) {
@@ -351,12 +356,11 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	// corrisponde al null.
+	// Non fa parte dell'albero sintattico ma viene restituito da type check di EmptyNode.
 	public static class EmptyTypeNode extends TypeNode {
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
-
-
-
 }

@@ -13,6 +13,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	private final Map<String, Map<String, STentry>> classTable = new HashMap<>(); //serve per preservare le dichiarazioni interne a una classe (metodi e campi)
 	// dopo che il visitor ha concluso la visita della dichiarazione della classe
 	private int nestingLevel=0; // current nesting level
+	// offset -2 necessario per la corrispondenza tra i layouts in caso di classe o solo funzione.
 	private int decOffset=-2; // counter for offset of local declarations at current nesting level 
 	int stErrors=0;
 
@@ -55,6 +56,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		List<TypeNode> allFields = new ArrayList<>();
 		List<ArrowTypeNode> allMethods = new ArrayList<>();
+
+		// Quando si visita lo scope interno di una classe
+		//la Symbol Table per il livello corrispondente
+		//(livello 1 ) deve includere anche le
+		// STentry per i simboli (metodi e campi) ereditati su
+		// cui non è stato fatto overriding, per questo
+		// si chiama Virtual Table.
 		Map<String, STentry> virtualTable = new HashMap<>();
 		if (n.superID != null) {
 			superClassEntry = hm.get(n.superID);

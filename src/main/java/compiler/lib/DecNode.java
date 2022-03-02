@@ -1,5 +1,8 @@
 package compiler.lib;
 
+/**
+ * Nodo di una dichiarazione, contiene il tipo del nodo come campo.
+ */
 public abstract class DecNode extends Node {
 	
 	protected TypeNode type;

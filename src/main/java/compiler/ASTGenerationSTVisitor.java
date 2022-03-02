@@ -42,29 +42,36 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return visit(c.progbody());
 	}
 
+	//Generazione del ProgLetInNode
 	@Override
 	public Node visitLetInProg(LetInProgContext c) {
 		if (print) printVarAndProdName(c);
 		List<DecNode> declist = new ArrayList<>();
 		List<ClassNode> classlist = new ArrayList<>();
-		for (DecContext dec : c.dec()) declist.add((DecNode) visit(dec));
+		// generazione dei ClassNode
 		for (CldecContext cldec : c.cldec()) classlist.add((ClassNode) visit(cldec));
+		// generazione dei DecNode
+		for (DecContext dec : c.dec()) declist.add((DecNode) visit(dec));
 		return new ProgLetInNode(classlist,declist, visit(c.exp()));
 	}
 
+	// in caso di programma senza dichiarazioni ma con solo espressioni.
 	@Override
 	public Node visitNoDecProg(NoDecProgContext c) {
 		if (print) printVarAndProdName(c);
 		return new ProgNode(visit(c.exp()));
 	}
 
+	//Generazione dei ClassNode.
 	@Override
 	public Node visitCldec(CldecContext c) {
 		if (print) printVarAndProdName(c);
 		List<FieldNode> fieldList = new ArrayList<>();
 		int firstFieldId = 1;
+		// Controllo se la classe sta ereditando
 		if (c.EXTENDS() != null){
-			firstFieldId++;
+			firstFieldId++; // in caso positivo allora gli ID dei campi inizieranno da 2 e non da 1. ( ID 0 è il nome della classe )
+
 		}
 		for (int i = firstFieldId; i < c.ID().size(); i++) {
 			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-firstFieldId))); //i-1 perchè il for inizia da 1 pr saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
@@ -77,6 +84,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		}
 		Node n = null;
 		if (c.ID().size() > 0) {
+			// se eredita gli passo come parametro il nome della classe ereditata altrimenti null.
 			n = new ClassNode(c.ID(0).getText(), fieldList, methodList, c.EXTENDS() != null ? c.ID(1).getText() : null);
 			n.setLine(c.CLASS().getSymbol().getLine());
 		}
