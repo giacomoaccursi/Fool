@@ -74,7 +74,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 		}
 		for (int i = firstFieldId; i < c.ID().size(); i++) {
-			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-firstFieldId))); //i-1 perchè il for inizia da 1 pr saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
+			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i-firstFieldId))); //i-1 perchè il for inizia da 1 per saltare l'id della classe, ma nella lista dei type dobbiam partire da 0
 			f.setLine(c.ID(i).getSymbol().getLine());
 			fieldList.add(f);
 		}
@@ -307,7 +307,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		if (print) printVarAndProdName(c);
 		IdNode n = new IdNode(c.ID().getText());
 		n.setLine(c.ID().getSymbol().getLine());
-		return new RefTypeNode(n.id); //guarda ragionamento a 2:06 della lezione del 14/12
+		return new RefTypeNode(n.id);
 	}
 
 	@Override

@@ -5,26 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ea9d59c0-b95c-4f20-8b1e-d3411178e792" name="Changes" comment="">
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/AST.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/PrintEASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/PrintEASTVisitor.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeRels.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/main/java/compiler/TypeRels.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/java/compiler/Test.java" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/java/compiler/Test.java" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/bankloan.fool" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/bankloan.fool" afterDir="false" />
-      <change beforePath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/listif.fool" beforeDir="false" afterPath="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources/listif.fool" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/AST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/PrintEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/PrintEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/SymbolTableASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/compiler/TypeRels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/compiler/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/compiler/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/bankloan.fool" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/bankloan.fool" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/listif.fool" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/listif.fool" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/checkOpt3.fool" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/checkOpt3.fool" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +60,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -83,7 +71,7 @@
     </file-type-list>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="24xULIQCn2ewvQV36pKZvIWRowF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -94,40 +82,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources" />
+    <property name="last_opened_file_path" value="$USER_HOME$/magistrale/ParadigmiDiProgettazione/lab/pps-21-22-lab02" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.123076916" />
     <property name="project.structure.side.proportion" value="0.56907475" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin.scripting" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$USER_HOME$/Documents/uni/magistrale/Compilatori/Fool/src/test/resources" />
+      <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Test">
-    <configuration name="Fool [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.Test.testOpt3">
     <configuration name="Fool [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -212,13 +179,34 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Test.testOpt3" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;compiler.Test.testOpt3&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Test.testOpt3" />
         <item itemvalue="Gradle.Test" />
-        <item itemvalue="Gradle.Test.testInheritance" />
         <item itemvalue="Gradle.Test.testObjectOrientation" />
+        <item itemvalue="Gradle.Test.testInheritance" />
         <item itemvalue="Gradle.Fool [test]" />
-        <item itemvalue="Gradle.Fool [build]" />
       </list>
     </recent_temporary>
   </component>

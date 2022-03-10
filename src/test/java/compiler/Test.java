@@ -21,7 +21,6 @@ public class Test {
     public void testOptimization() throws IOException {
         foolTester.runProgram(resourceDir + "listif.fool");
     }
-
     @org.junit.jupiter.api.Test
     public void testOpt3() throws IOException {
         foolTester.runProgram(resourceDir + "checkOpt3.fool");

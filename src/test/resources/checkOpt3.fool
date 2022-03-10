@@ -1,17 +1,13 @@
 let
-  class A (a:int) {
-    fun c:int () a;
-  }
-  
-  class B extends A (b:bool) {
+  class B (b:bool) {
     fun d:int () b;
   }
 
-  class T extends A (t:bool) {
+  class T extends B (t:bool) {
       fun r:int () t;
   }
 
-  var bl:T = new T(1,true);
-  var bl2:B = new B(1,false);
+  var tt:T = new T(true, true);
+  var bb:B = new B(false);
 
-in print(if (1==2) then {bl} else {bl2});
+in print(if (1==2) then {tt} else {bb});

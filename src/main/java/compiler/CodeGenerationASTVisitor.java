@@ -47,12 +47,15 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	public String visitNode(ClassNode n){
 		if (print) printNode(n, n.id);
 		List<String> dispatchTable;
+		//se non eredito la dispatch è inizialmente vuota
 		if (n.superID == null) {
 			dispatchTable =new ArrayList<>();
 		} else {
+			//se eredito mi copio la dispach table della superclasse
 			dispatchTable = dispatchTables.get(-n.superEntry.offset-2);
 		}
 		String labels = null;
+		//aggiungo alla dispatch table le lable dei metodi che ho dichiarato in posizione offset e aggiorno quelle dei metodi di cui faccio override
 		for (MethodNode method : n.methodList){
 			visit(method);
 			if( method.offset >= dispatchTable.size() ){
@@ -61,13 +64,15 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				dispatchTable.set(method.offset, method.label);
 			}
 		}
+		//aggiungo la dispatchtable a quella globale
 		dispatchTables.add(dispatchTable);
 		for (String s : dispatchTable){
+			//memorizzo le label dei metodi nell'heap
 			labels = nlJoin(labels,"push " + s, "lhp", "sw", "lhp", "push 1", "add", "shp");
 		}
 
 		return nlJoin(
-				"lhp",
+				"lhp", //pusho il valore attuale di hp sullo stack, corrisponde al dispatch pointer della classe
 				labels
 		);
 	}
@@ -78,7 +83,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		n.label = methodLabel;
 		String declCode = null, popDecl = null, popParl = null;
 		for (Node dec : n.declist) {
-			declCode = nlJoin(declCode,visit(dec));
+			declCode = nlJoin(declCode,visit(dec)); //visito le dichiarazioni all'interno del metodo
 			popDecl = nlJoin(popDecl,"pop");
 		}
 		for (int i=0;i<n.parlist.size();i++) popParl = nlJoin(popParl,"pop");
@@ -153,7 +158,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	public String visitNode(EmptyNode n) {
   		if (print) printNode(n);
 		return nlJoin(
-				"push -1"
+				"push -1" //mi assicuro che sia diverso dall'object pointer di ogni oggetto creato
 		);
 	}
 

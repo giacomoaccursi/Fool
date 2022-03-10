@@ -233,7 +233,7 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-	//chiamata di un oggetto di una classe.
+	//chiamata del metodo di un oggetto di una classe.
 	public static class ClassCallNode extends Node {
 		final String fieldId; // nome dell'oggetto.
 		final String methodId; // metodo chiamato.
